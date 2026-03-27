@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 
-public class Bai6 {
+public class Giaiphuongtrinh {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
