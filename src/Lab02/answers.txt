@@ -1,0 +1,14 @@
+Câu hỏi bài 15: Java là ngôn ngữ truyền tham trị (pass by value) hay tham chiếu (pass by reference)?**
+
+Java luôn là ngôn ngữ *truyền tham trị (pass by value)*.
+
+Khi truyền tham số vào hàm, Java sẽ tạo một bản sao của giá trị biến.
+
+- Với kiểu dữ liệu nguyên thủy (int, float, ...), giá trị thực được sao chép.
+- Với đối tượng, giá trị được sao chép là *reference* (địa chỉ trỏ đến object), không phải bản thân object.
+
+Trong hàm `swap()`, việc hoán đổi chỉ xảy ra trên các bản sao của reference nên không ảnh hưởng đến object gốc bên ngoài hàm.
+
+Trong hàm `changeTitle()`, reference được truyền vào vẫn trỏ đến cùng một object trong bộ nhớ, nên khi thay đổi thuộc tính của object thì object gốc cũng bị thay đổi.
+
+ Kết luận: Java không hỗ trợ truyền tham chiếu, mà luôn sử dụng truyền tham trị, kể cả với object.
