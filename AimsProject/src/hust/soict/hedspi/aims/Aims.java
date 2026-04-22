@@ -60,5 +60,5 @@ public class Aims {
             System.out.println("Please choose a number: 0-1-2-3-4-5");
         }
     }
-}
+} // release03
 // nho bo sung object
