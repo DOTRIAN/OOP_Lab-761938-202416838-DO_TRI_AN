@@ -1,6 +1,6 @@
 package hust.soict.hedspi.aims.media;
 
-public class Track {
+public class Track implements Playable {
     private String title;
     private int length;
 
@@ -29,5 +29,15 @@ public class Track {
 
         Track other = (Track) obj;
         return length == other.length && title.equals(other.title);
+    }
+    @Override
+    public void play() {
+        if (this.getLength() <= 0) {
+            System.out.println("ERROR: Track length is non-positive!");
+            return;
+        }
+
+        System.out.println("Playing track: " + this.getTitle());
+        System.out.println("Track length: " + this.getLength());
     }
 }
