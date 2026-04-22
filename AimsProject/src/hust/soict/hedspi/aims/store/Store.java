@@ -39,4 +39,10 @@ public class Store {
             System.out.println((i + 1) + ". " + itemsInStore.get(i));
         }
     }
+    public void printStore() {
+        System.out.println("\n***********************STORE***********************");
+        for (int i = 0; i < itemsInStore.size(); i++) {
+            System.out.println((i + 1) + ". " + itemsInStore.get(i).toString());
+        }
+    }
 }
