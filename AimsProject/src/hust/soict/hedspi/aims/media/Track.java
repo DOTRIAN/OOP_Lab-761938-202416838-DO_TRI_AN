@@ -28,7 +28,7 @@ public class Track implements Playable {
         }
 
         Track other = (Track) obj;
-        return length == other.length && title.equals(other.title);
+        return length == other.length && title != null && title.equals(other.title);
     }
     @Override
     public void play() {

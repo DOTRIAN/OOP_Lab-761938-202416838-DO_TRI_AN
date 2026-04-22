@@ -12,8 +12,8 @@ public class Aims {
         DigitalVideoDisc dvd2 = new DigitalVideoDisc(
                 "Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
 
-        cart.addDigitalVideoDisc(dvd1);
-        cart.addDigitalVideoDisc(dvd2);
+        cart.addMedia(dvd1);
+        cart.addMedia(dvd2);
         cart.displayCart();
     }
 }
