@@ -1,0 +1,35 @@
+Câu 9:
+ When should accessor methods be used?
+ Theo tác giả Allen Holub, việc sử dụng các phương thức truy cập (accessors) nên được hạn chế tối đa để bảo vệ tính đóng gói (encapsulation). Tuy nhiên, có những trường hợp cụ thể mà việc sử dụng chúng là cần thiết:
+ -Khi trả về đối tượng dưới dạng Interface: Giúp cô lập các thay đổi; lập trình viên chỉ cần điều chỉnh định nghĩa đối tượng khớp với Interface mà không cần sửa đổi quá nhiều thuộc tính bên trong lớp khi có cập nhật.
+ -Giao tiếp với các tầng ranh giới (Procedural Boundary Layers): Cần thiết khi chương trình hướng đối tượng tương tác với các hệ thống thủ tục như hệ điều hành hoặc cơ sở dữ liệu (ví dụ: JDBC), nơi các nhà phát triển thư viện không thể dự đoán trước mục đích sử dụng dữ liệu của người dùng.
+ -Trong các gói thư viện Java dùng chung (Generic Java Packages): Để đảm bảo tính linh hoạt cao nhất cho người sử dụng trong nhiều hoàn cảnh và mục đích khác nhau mà nhà phát triển không thể dự đoán được mô hình động của người dùng.
+ -Sử dụng cho các công cụ tự động (UI-builders, JavaBeans): Accessor đóng vai trò như các "tag" đánh dấu thuộc tính để công cụ nhận diện thông qua cơ chế Introspection/Reflection.
+ -Đáp ứng yêu cầu hiển thị của hệ thống: Như trong dự án AIMS, getters được sử dụng vì hệ thống cần truy xuất thông tin để hiển thị danh sách DVD và tổng chi phí trong giỏ hàng cho người dùng.
+Câu 10: Câu trả lời là không.
+Lý do: Java phân biệt các phương thức (bao gồm cả constructor) dựa trên chữ ký phương thức (method signature), bao gồm tên phương thức và danh sách kiểu dữ liệu của các tham số. Vì cả title và category đều có kiểu dữ liệu là String, nên hai constructor này sẽ có chữ ký giống hệt nhau: DigitalVideoDisc(String).
+Khi đó, trình biên dịch sẽ báo lỗi vì không thể phân biệt được hai constructor này khi khởi tạo đối tượng.
+Câu 14.1:
+Ưu tiên sử dụng Varargs (variable arguments) hơn so với tham số mảng thông thường, do:
+
+Tính linh hoạt: Varargs cho phép phương thức chấp nhận cả một mảng đối tượng DVD hoặc một danh sách các đối số DVD riêng lẻ cách nhau bởi dấu phẩy.
+
+Cú pháp tối giản: Người dùng không cần khởi tạo mảng một cách tường minh khi gọi phương thức (ví dụ: gọi addDigitalVideoDisc(dvd1, dvd2) thay vì addDigitalVideoDisc(new DigitalVideoDisc[]{dvd1, dvd2})), giúp mã nguồn sạch và dễ đọc hơn.
+
+Khả năng tương thích: Bên trong phương thức, Varargs vẫn được xử lý như một mảng, đảm bảo logic thực thi không bị phức tạp hóa.
+
+
+Câu hỏi bài 15: Java là ngôn ngữ truyền tham trị (pass by value) hay tham chiếu (pass by reference)?**
+
+Java luôn là ngôn ngữ *truyền tham trị (pass by value)*.
+
+Khi truyền tham số vào hàm, Java sẽ tạo một bản sao của giá trị biến.
+
+- Với kiểu dữ liệu nguyên thủy (int, float, ...), giá trị thực được sao chép.
+- Với đối tượng, giá trị được sao chép là *reference* (địa chỉ trỏ đến object), không phải bản thân object.
+
+Trong hàm `swap()`, việc hoán đổi chỉ xảy ra trên các bản sao của reference nên không ảnh hưởng đến object gốc bên ngoài hàm.
+
+Trong hàm `changeTitle()`, reference được truyền vào vẫn trỏ đến cùng một object trong bộ nhớ, nên khi thay đổi thuộc tính của object thì object gốc cũng bị thay đổi.
+
+ Kết luận: Java không hỗ trợ truyền tham chiếu, mà luôn sử dụng truyền tham trị, kể cả với object.
