@@ -45,4 +45,17 @@ public class Store {
             System.out.println((i + 1) + ". " + itemsInStore.get(i).toString());
         }
     }
+
+    public ArrayList<Media> getItemsInStore() {
+        return itemsInStore;
+    }
+
+    public Media findMediaByTitle(String title) {
+        for (Media media : itemsInStore) {
+            if (media.isMatch(title)) {
+                return media;
+            }
+        }
+        return null;
+    }
 }
