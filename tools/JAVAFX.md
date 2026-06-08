@@ -7,9 +7,11 @@ JavaFX was added without changing the existing source layout or converting the p
 - `tools/javafx-sdk`: local JavaFX SDK used by IntelliJ and command-line scripts
 - `GUIProject/src/hust/soict/hedspi/javafx/HelloFX.java`: minimal JavaFX entry point
 - `GUIProject/src/hust/soict/hedspi/javafx/JavaFXSmokeTest.java`: quick runtime check for window + button handling
+- `GUIProject/src/hust/soict/hedspi/javafx/fxml/*`: FXML + controller sample for Scene Builder
 - `tools/setup-javafx.ps1`: downloads the JavaFX SDK if it is missing
 - `tools/compile-javafx.ps1`: compiles JavaFX sources to `GUIProject/out-javafx`
 - `tools/run-javafx-hellofx.ps1`: compiles and launches the sample JavaFX application
+- `tools/run-javafx-fxml.ps1`: compiles and launches the FXML sample
 
 ## IntelliJ
 
@@ -21,10 +23,28 @@ Shared run configurations were added in `.idea/runConfigurations`:
 
 - `HelloFX`
 - `JavaFX Smoke Test`
+- `FXML HelloFX`
+
+## Scene Builder
+
+Scene Builder integration in IntelliJ uses an IDE-wide setting, not a project file in this repository.
+
+Set it manually in:
+
+- `File > Settings > Languages & Frameworks > JavaFX`
+- `Path to SceneBuilder`:
+  `C:\Users\Admin\AppData\Local\SceneBuilder\SceneBuilder.exe`
+
+After that, you can:
+
+- open `GUIProject/src/hust/soict/hedspi/javafx/fxml/hello-view.fxml`
+- right-click the file
+- choose `Open in Scene Builder`
 
 ## Command line
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\tools\compile-javafx.ps1
 powershell -ExecutionPolicy Bypass -File .\tools\run-javafx-hellofx.ps1
+powershell -ExecutionPolicy Bypass -File .\tools\run-javafx-fxml.ps1
 ```

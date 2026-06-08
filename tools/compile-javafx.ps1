@@ -21,4 +21,13 @@ if (-not $javaFiles) {
 
 javac --module-path $sdkLib --add-modules javafx.controls,javafx.fxml -d $outputDir $javaFiles
 
+Get-ChildItem -Path (Join-Path $sourceRoot "hust\\soict\\hedspi\\javafx") -Filter *.fxml -Recurse |
+    ForEach-Object {
+        $relativePath = $_.FullName.Substring($sourceRoot.Length + 1)
+        $destination = Join-Path $outputDir $relativePath
+        $destinationDir = Split-Path -Parent $destination
+        New-Item -ItemType Directory -Force -Path $destinationDir | Out-Null
+        Copy-Item -Path $_.FullName -Destination $destination -Force
+    }
+
 Write-Output "Compiled JavaFX sources to $outputDir"
