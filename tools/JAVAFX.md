@@ -1,50 +1,39 @@
 # JavaFX support
 
-JavaFX was added without changing the existing source layout or converting the project to Maven/Gradle.
+JavaFX was added without converting the project to Maven or Gradle.
 
-## Files added
+## Current lab files
 
-- `tools/javafx-sdk`: local JavaFX SDK used by IntelliJ and command-line scripts
-- `GUIProject/src/hust/soict/hedspi/javafx/HelloFX.java`: minimal JavaFX entry point
-- `GUIProject/src/hust/soict/hedspi/javafx/JavaFXSmokeTest.java`: quick runtime check for window + button handling
-- `GUIProject/src/hust/soict/hedspi/javafx/fxml/*`: FXML + controller sample for Scene Builder
-- `tools/setup-javafx.ps1`: downloads the JavaFX SDK if it is missing
-- `tools/compile-javafx.ps1`: compiles JavaFX sources to `GUIProject/out-javafx`
-- `tools/run-javafx-hellofx.ps1`: compiles and launches the sample JavaFX application
-- `tools/run-javafx-fxml.ps1`: compiles and launches the FXML sample
+- `GUIProject/src/hust/soict/hedspi/javafx/Painter.java`
+- `GUIProject/src/hust/soict/hedspi/javafx/PainterController.java`
+- `GUIProject/src/hust/soict/hedspi/javafx/Painter.fxml`
+- `tools/setup-javafx.ps1`
+- `tools/compile-javafx.ps1`
+- `tools/run-javafx-painter.ps1`
 
 ## IntelliJ
 
-The module file now includes a project library named `JavaFX SDK` pointing to `tools/javafx-sdk/lib`.
+The module includes a project library named `JavaFX SDK` pointing to `tools/javafx-sdk/lib`.
 
-If IntelliJ is already open, reload the project so it picks up `.idea/libraries/JavaFX_SDK.xml`.
+Shared run configuration:
 
-Shared run configurations were added in `.idea/runConfigurations`:
-
-- `HelloFX`
-- `JavaFX Smoke Test`
-- `FXML HelloFX`
+- `Painter`
 
 ## Scene Builder
 
-Scene Builder integration in IntelliJ uses an IDE-wide setting, not a project file in this repository.
-
-Set it manually in:
+Set the IDE-wide Scene Builder path manually in:
 
 - `File > Settings > Languages & Frameworks > JavaFX`
 - `Path to SceneBuilder`:
   `C:\Users\Admin\AppData\Local\SceneBuilder\SceneBuilder.exe`
 
-After that, you can:
+Then open:
 
-- open `GUIProject/src/hust/soict/hedspi/javafx/fxml/hello-view.fxml`
-- right-click the file
-- choose `Open in Scene Builder`
+- `GUIProject/src/hust/soict/hedspi/javafx/Painter.fxml`
 
 ## Command line
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\tools\compile-javafx.ps1
-powershell -ExecutionPolicy Bypass -File .\tools\run-javafx-hellofx.ps1
-powershell -ExecutionPolicy Bypass -File .\tools\run-javafx-fxml.ps1
+powershell -ExecutionPolicy Bypass -File .\tools\run-javafx-painter.ps1
 ```

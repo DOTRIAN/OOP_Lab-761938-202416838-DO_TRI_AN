@@ -10,6 +10,10 @@ if (-not (Test-Path $sdkLib)) {
     throw "JavaFX SDK not found. Run tools\\setup-javafx.ps1 first."
 }
 
+if (Test-Path $outputDir) {
+    Remove-Item -Recurse -Force $outputDir
+}
+
 New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
 
 $javaFiles = Get-ChildItem -Path (Join-Path $sourceRoot "hust\\soict\\hedspi\\javafx") -Filter *.java -Recurse |
