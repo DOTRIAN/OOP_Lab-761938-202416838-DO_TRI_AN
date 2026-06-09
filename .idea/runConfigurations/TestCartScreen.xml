@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="TestCartScreen" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="hust.soict.hedspi.test.screen.customer.cart.TestCartScreen" />
+    <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/tools/javafx-sdk/lib --add-modules javafx.controls,javafx.fxml --enable-native-access=javafx.graphics" />
+    <module name="OOP_Lab-761938-202416838-DO_TRI_AN" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
