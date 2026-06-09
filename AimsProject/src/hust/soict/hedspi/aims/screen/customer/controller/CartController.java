@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -99,6 +100,13 @@ public class CartController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 showFilteredMedia(newValue);
+            }
+        });
+
+        radioBtnFilterId.getToggleGroup().selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                showFilteredMedia(tfFilter.getText());
             }
         });
 

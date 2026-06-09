@@ -1,8 +1,9 @@
 package hust.soict.hedspi.aims.media;
 
 import java.util.Comparator;
+import java.util.Objects;
 
-public abstract class Media {
+public abstract class Media implements Comparable<Media> {
     public static final Comparator<Media> COMPARE_BY_TITLE_COST =
             new MediaComparatorByTitleCost();
     public static final Comparator<Media> COMPARE_BY_COST_TITLE =
@@ -92,6 +93,26 @@ public abstract class Media {
         }
 
         Media other = (Media) obj;
-        return this.title != null && this.title.equals(other.getTitle());
+        return Objects.equals(this.title, other.getTitle())
+                && Float.compare(this.cost, other.getCost()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, cost);
+    }
+
+    @Override
+    public int compareTo(Media other) {
+        if (other == null) {
+            throw new NullPointerException("Cannot compare Media with null.");
+        }
+
+        int titleComparison = this.title.compareToIgnoreCase(other.getTitle());
+        if (titleComparison != 0) {
+            return titleComparison;
+        }
+
+        return Float.compare(this.cost, other.getCost());
     }
 }

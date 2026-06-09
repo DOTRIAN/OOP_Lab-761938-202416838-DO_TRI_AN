@@ -31,7 +31,7 @@ public class ViewStoreController {
     public void initialize() {
         final String ITEM_FXML_FILE_PATH = "/hust/soict/hedspi/aims/screen/customer/view/Item.fxml";
         int column = 0;
-        int row = 1;
+        int row = 0;
 
         for (int i = 0; i < store.getItemsInStore().size(); i++) {
             try {
