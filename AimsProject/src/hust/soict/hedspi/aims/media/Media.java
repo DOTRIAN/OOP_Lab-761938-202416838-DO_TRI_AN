@@ -22,11 +22,14 @@ public abstract class Media {
 
     public Media(String title) {
         this();
+        validateTitle(title);
         this.title = title;
     }
 
     public Media(String title, String category, float cost) {
         this();
+        validateTitle(title);
+        validateCost(cost);
         this.title = title;
         this.category = category;
         this.cost = cost;
@@ -41,6 +44,7 @@ public abstract class Media {
     }
 
     public void setTitle(String title) {
+        validateTitle(title);
         this.title = title;
     }
 
@@ -57,7 +61,20 @@ public abstract class Media {
     }
 
     public void setCost(float cost) {
+        validateCost(cost);
         this.cost = cost;
+    }
+
+    private void validateTitle(String title) {
+        if (title == null || title.isBlank()) {
+            throw new IllegalArgumentException("Title must not be blank.");
+        }
+    }
+
+    private void validateCost(float cost) {
+        if (cost < 0) {
+            throw new IllegalArgumentException("Cost must not be negative.");
+        }
     }
 
     public boolean isMatch(String title) {

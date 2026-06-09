@@ -24,11 +24,15 @@ public class CartTest {
         cd.addTrack(track1);
         cd.addTrack(track2);
 
-        cart.addMedia(dvd1);
-        cart.addMedia(dvd2);
-        cart.addMedia(dvd3);
-        cart.addMedia(book);
-        cart.addMedia(cd);
+        try {
+            cart.addMedia(dvd1);
+            cart.addMedia(dvd2);
+            cart.addMedia(dvd3);
+            cart.addMedia(book);
+            cart.addMedia(cd);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         cart.print();
         cart.searchById(dvd2.getId());

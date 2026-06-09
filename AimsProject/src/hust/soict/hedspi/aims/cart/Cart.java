@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import hust.soict.hedspi.aims.exception.LimitExceededException;
 import hust.soict.hedspi.aims.media.Media;
 
 public class Cart {
@@ -11,15 +12,17 @@ public class Cart {
 
     private ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
 
-    public void addMedia(Media media) {
+    public void addMedia(Media media) throws LimitExceededException {
+        if (media == null) {
+            throw new IllegalArgumentException("Media must not be null.");
+        }
+
         if (itemsOrdered.size() >= MAX_NUMBERS_ORDERED) {
-            System.out.println("The cart is almost full");
-            return;
+            throw new LimitExceededException("ERROR: The number of media in the cart has reached its limit.");
         }
 
         if (itemsOrdered.contains(media)) {
-            System.out.println("The media already exists");
-            return;
+            throw new IllegalStateException("The media already exists in the cart.");
         }
 
         itemsOrdered.add(media);
@@ -27,10 +30,14 @@ public class Cart {
     }
 
     public void removeMedia(Media media) {
+        if (media == null) {
+            throw new IllegalArgumentException("Media must not be null.");
+        }
+
         if (itemsOrdered.remove(media)) {
             System.out.println("The media has been removed");
         } else {
-            System.out.println("The media was not found");
+            throw new IllegalStateException("The media was not found in the cart.");
         }
     }
 

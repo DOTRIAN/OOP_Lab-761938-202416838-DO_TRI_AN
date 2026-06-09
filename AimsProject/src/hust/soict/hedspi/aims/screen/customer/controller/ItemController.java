@@ -3,6 +3,7 @@ package hust.soict.hedspi.aims.screen.customer.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -44,7 +45,11 @@ public class ItemController {
 
     @FXML
     void btnAddToCartClicked(ActionEvent event) {
-        cart.addMedia(media);
+        try {
+            cart.addMedia(media);
+        } catch (Exception ex) {
+            showError(ex.getMessage());
+        }
     }
 
     @FXML
@@ -52,5 +57,12 @@ public class ItemController {
         if (media instanceof Playable) {
             ((Playable) media).play();
         }
+    }
+
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Operation failed");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

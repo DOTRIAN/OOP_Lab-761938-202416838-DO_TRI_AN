@@ -26,14 +26,20 @@ public class AddBookToStoreScreen extends AddItemToStoreScreen {
         JButton btnAdd = new JButton("Add Book");
 
         btnAdd.addActionListener(e -> {
-            String title = tfTitle.getText();
-            String category = tfCategory.getText();
-            float cost = Float.parseFloat(tfCost.getText());
-            store.addMedia(new Book(title, category, cost));
-            JOptionPane.showMessageDialog(this, "Book added to store.");
-            tfTitle.setText("");
-            tfCategory.setText("");
-            tfCost.setText("");
+            try {
+                String title = tfTitle.getText();
+                String category = tfCategory.getText();
+                float cost = Float.parseFloat(tfCost.getText());
+                store.addMedia(new Book(title, category, cost));
+                JOptionPane.showMessageDialog(this, "Book added to store.");
+                tfTitle.setText("");
+                tfCategory.setText("");
+                tfCost.setText("");
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid cost value.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         center.add(new JLabel("Title"));

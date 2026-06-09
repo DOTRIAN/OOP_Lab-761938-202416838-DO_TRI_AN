@@ -28,18 +28,24 @@ public class AddDigitalVideoDiscToStoreScreen extends AddItemToStoreScreen {
         JButton btnAdd = new JButton("Add DVD");
 
         btnAdd.addActionListener(e -> {
-            String title = tfTitle.getText();
-            String category = tfCategory.getText();
-            String director = tfDirector.getText();
-            int length = Integer.parseInt(tfLength.getText());
-            float cost = Float.parseFloat(tfCost.getText());
-            store.addMedia(new DigitalVideoDisc(title, category, director, length, cost));
-            JOptionPane.showMessageDialog(this, "DVD added to store.");
-            tfTitle.setText("");
-            tfCategory.setText("");
-            tfDirector.setText("");
-            tfLength.setText("");
-            tfCost.setText("");
+            try {
+                String title = tfTitle.getText();
+                String category = tfCategory.getText();
+                String director = tfDirector.getText();
+                int length = Integer.parseInt(tfLength.getText());
+                float cost = Float.parseFloat(tfCost.getText());
+                store.addMedia(new DigitalVideoDisc(title, category, director, length, cost));
+                JOptionPane.showMessageDialog(this, "DVD added to store.");
+                tfTitle.setText("");
+                tfCategory.setText("");
+                tfDirector.setText("");
+                tfLength.setText("");
+                tfCost.setText("");
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid length or cost value.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         center.add(new JLabel("Title"));

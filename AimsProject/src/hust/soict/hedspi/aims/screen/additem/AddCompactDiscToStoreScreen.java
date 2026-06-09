@@ -29,20 +29,26 @@ public class AddCompactDiscToStoreScreen extends AddItemToStoreScreen {
         JButton btnAdd = new JButton("Add CD");
 
         btnAdd.addActionListener(e -> {
-            String title = tfTitle.getText();
-            String category = tfCategory.getText();
-            String director = tfDirector.getText();
-            int length = Integer.parseInt(tfLength.getText());
-            float cost = Float.parseFloat(tfCost.getText());
-            String artist = tfArtist.getText();
-            store.addMedia(new CompactDisc(title, category, director, length, cost, artist));
-            JOptionPane.showMessageDialog(this, "CD added to store.");
-            tfTitle.setText("");
-            tfCategory.setText("");
-            tfDirector.setText("");
-            tfLength.setText("");
-            tfCost.setText("");
-            tfArtist.setText("");
+            try {
+                String title = tfTitle.getText();
+                String category = tfCategory.getText();
+                String director = tfDirector.getText();
+                int length = Integer.parseInt(tfLength.getText());
+                float cost = Float.parseFloat(tfCost.getText());
+                String artist = tfArtist.getText();
+                store.addMedia(new CompactDisc(title, category, director, length, cost, artist));
+                JOptionPane.showMessageDialog(this, "CD added to store.");
+                tfTitle.setText("");
+                tfCategory.setText("");
+                tfDirector.setText("");
+                tfLength.setText("");
+                tfCost.setText("");
+                tfArtist.setText("");
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid length or cost value.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         center.add(new JLabel("Title"));

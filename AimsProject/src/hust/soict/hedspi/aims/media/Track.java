@@ -5,6 +5,12 @@ public class Track implements Playable {
     private int length;
 
     public Track(String title, int length) {
+        if (title == null || title.isBlank()) {
+            throw new IllegalArgumentException("Track title must not be blank.");
+        }
+        if (length < 0) {
+            throw new IllegalArgumentException("Track length must not be negative.");
+        }
         this.title = title;
         this.length = length;
     }

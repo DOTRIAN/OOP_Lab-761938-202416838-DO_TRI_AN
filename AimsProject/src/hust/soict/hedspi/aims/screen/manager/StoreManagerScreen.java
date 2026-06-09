@@ -125,21 +125,25 @@ public class StoreManagerScreen extends JFrame {
     public static void main(String[] args) {
         Store store = new Store();
 
-        store.addMedia(new DigitalVideoDisc("Harry Potter and the Philosopher's Stone (2001)", "Fantasy", "Chris Columbus", 152, 3.5f));
-        store.addMedia(new DigitalVideoDisc("Harry Potter and the Chamber of Secrets (2002)", "Fantasy", "Chris Columbus", 161, 3.55f));
-        store.addMedia(new DigitalVideoDisc("Harry Potter and the Prisoner of Azkaban (2004)", "Fantasy", "Alfonso Cuaron", 142, 5.6f));
-        store.addMedia(new DigitalVideoDisc("Harry Potter and the Goblet of Fire (2005)", "Fantasy", "Mike Newell", 157, 4.55f));
+        try {
+            store.addMedia(new DigitalVideoDisc("Harry Potter and the Philosopher's Stone (2001)", "Fantasy", "Chris Columbus", 152, 3.5f));
+            store.addMedia(new DigitalVideoDisc("Harry Potter and the Chamber of Secrets (2002)", "Fantasy", "Chris Columbus", 161, 3.55f));
+            store.addMedia(new DigitalVideoDisc("Harry Potter and the Prisoner of Azkaban (2004)", "Fantasy", "Alfonso Cuaron", 142, 5.6f));
+            store.addMedia(new DigitalVideoDisc("Harry Potter and the Goblet of Fire (2005)", "Fantasy", "Mike Newell", 157, 4.55f));
 
-        Book book = new Book("Fath: the Bot Cutters", "Book", 10.39f);
-        store.addMedia(book);
+            Book book = new Book("Fath: the Bot Cutters", "Book", 10.39f);
+            store.addMedia(book);
 
-        CompactDisc cd1 = new CompactDisc("Eduro Nostalgia", "Music", "Producer A", 9.65f, "Various Artists");
-        cd1.addTrack(new Track("Track A", 4));
-        store.addMedia(cd1);
+            CompactDisc cd1 = new CompactDisc("Eduro Nostalgia", "Music", "Producer A", 9.65f, "Various Artists");
+            cd1.addTrack(new Track("Track A", 4));
+            store.addMedia(cd1);
 
-        store.addMedia(new DigitalVideoDisc("The Hunger Games", "Action", "Gary Ross", 142, 3.45f));
-        store.addMedia(new DigitalVideoDisc("Catching Fire", "Action", "Francis Lawrence", 146, 4.35f));
-        store.addMedia(new DigitalVideoDisc("Mockingjay", "Action", "Francis Lawrence", 123, 5.15f));
+            store.addMedia(new DigitalVideoDisc("The Hunger Games", "Action", "Gary Ross", 142, 3.45f));
+            store.addMedia(new DigitalVideoDisc("Catching Fire", "Action", "Francis Lawrence", 146, 4.35f));
+            store.addMedia(new DigitalVideoDisc("Mockingjay", "Action", "Francis Lawrence", 123, 5.15f));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         new StoreManagerScreen(store);
     }

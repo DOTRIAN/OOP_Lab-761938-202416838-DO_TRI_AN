@@ -34,17 +34,21 @@ public class TestCartScreen extends Application {
         store = new Store();
         cart = new Cart();
 
-        cart.addMedia(new DigitalVideoDisc("Harry Potter and the Philosopher's Stone (2001)", "Fantasy", "Chris Columbus", 152, 3.0f));
-        cart.addMedia(new DigitalVideoDisc("Harry Potter and the Chamber of Secrets (2002)", "Fantasy", "Chris Columbus", 161, 3.5f));
-        cart.addMedia(new DigitalVideoDisc("Harry Potter and the Prisoner of Azkaban (2004)", "Fantasy", "Alfonso Cuaron", 142, 5.0f));
-        cart.addMedia(new DigitalVideoDisc("Harry Potter and the Goblet of Fire (2005)", "Fantasy", "Mike Newell", 157, 4.5f));
+        try {
+            cart.addMedia(new DigitalVideoDisc("Harry Potter and the Philosopher's Stone (2001)", "Fantasy", "Chris Columbus", 152, 3.0f));
+            cart.addMedia(new DigitalVideoDisc("Harry Potter and the Chamber of Secrets (2002)", "Fantasy", "Chris Columbus", 161, 3.5f));
+            cart.addMedia(new DigitalVideoDisc("Harry Potter and the Prisoner of Azkaban (2004)", "Fantasy", "Alfonso Cuaron", 142, 5.0f));
+            cart.addMedia(new DigitalVideoDisc("Harry Potter and the Goblet of Fire (2005)", "Fantasy", "Mike Newell", 157, 4.5f));
 
-        Book book = new Book("Green Eggs and Ham", "Book", 3.3f);
-        cart.addMedia(book);
+            Book book = new Book("Green Eggs and Ham", "Book", 3.3f);
+            cart.addMedia(book);
 
-        CompactDisc cd = new CompactDisc("Eduro Nostalgia", "Music", "Producer A", 9.65f, "Various Artists");
-        cd.addTrack(new Track("Track A", 4));
-        cart.addMedia(cd);
+            CompactDisc cd = new CompactDisc("Eduro Nostalgia", "Music", "Producer A", 9.65f, "Various Artists");
+            cd.addTrack(new Track("Track A", 4));
+            cart.addMedia(cd);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         launch(args);
     }

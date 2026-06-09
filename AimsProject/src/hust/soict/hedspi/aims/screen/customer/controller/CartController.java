@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -167,14 +168,25 @@ public class CartController {
 
     @FXML
     void btnRemovePressed(ActionEvent event) {
-        Media media = tblMedia.getSelectionModel().getSelectedItem();
-        cart.removeMedia(media);
-        costLabel.setText(cart.totalCost() + " $");
+        try {
+            Media media = tblMedia.getSelectionModel().getSelectedItem();
+            cart.removeMedia(media);
+            costLabel.setText(cart.totalCost() + " $");
+        } catch (Exception ex) {
+            showError(ex.getMessage());
+        }
     }
 
     @FXML
     void btnPlaceOrderPressed(ActionEvent event) {
         cart.getItemsOrdered().clear();
         costLabel.setText(cart.totalCost() + " $");
+    }
+
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Operation failed");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

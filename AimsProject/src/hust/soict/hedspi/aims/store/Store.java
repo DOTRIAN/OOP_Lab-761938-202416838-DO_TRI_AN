@@ -2,6 +2,7 @@ package hust.soict.hedspi.aims.store;
 
 import java.util.ArrayList;
 
+import hust.soict.hedspi.aims.exception.LimitExceededException;
 import hust.soict.hedspi.aims.media.Media;
 
 public class Store {
@@ -9,15 +10,17 @@ public class Store {
 
     private ArrayList<Media> itemsInStore = new ArrayList<Media>();
 
-    public void addMedia(Media media) {
+    public void addMedia(Media media) throws LimitExceededException {
+        if (media == null) {
+            throw new IllegalArgumentException("Media must not be null.");
+        }
+
         if (itemsInStore.size() >= MAX_ITEMS_IN_STORE) {
-            System.out.println("The store is full");
-            return;
+            throw new LimitExceededException("ERROR: The number of media in the store has reached its limit.");
         }
 
         if (itemsInStore.contains(media)) {
-            System.out.println("The media already exists in the store");
-            return;
+            throw new IllegalStateException("The media already exists in the store.");
         }
 
         itemsInStore.add(media);
@@ -25,10 +28,14 @@ public class Store {
     }
 
     public void removeMedia(Media media) {
+        if (media == null) {
+            throw new IllegalArgumentException("Media must not be null.");
+        }
+
         if (itemsInStore.remove(media)) {
             System.out.println("The media has been removed from the store");
         } else {
-            System.out.println("The media was not found in the store");
+            throw new IllegalStateException("The media was not found in the store.");
         }
     }
 

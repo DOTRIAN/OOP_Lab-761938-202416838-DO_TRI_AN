@@ -95,10 +95,14 @@ public class Aims {
         cd.addTrack(new Track("Track 1", 4));
         cd.addTrack(new Track("Track 2", 5));
 
-        store.addMedia(dvd1);
-        store.addMedia(dvd2);
-        store.addMedia(book);
-        store.addMedia(cd);
+        try {
+            store.addMedia(dvd1);
+            store.addMedia(dvd2);
+            store.addMedia(book);
+            store.addMedia(cd);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void viewStore(Scanner scanner, Store store, Cart cart) {
@@ -125,7 +129,11 @@ public class Aims {
                     if (toAdd == null) {
                         System.out.println("Media not found.");
                     } else {
-                        cart.addMedia(toAdd);
+                        try {
+                            cart.addMedia(toAdd);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
                     }
                     break;
                 case 3:
@@ -151,7 +159,11 @@ public class Aims {
             choice = readInt(scanner);
             switch (choice) {
                 case 1:
-                    cart.addMedia(media);
+                    try {
+                        cart.addMedia(media);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 2:
                     playMedia(media);
@@ -235,7 +247,11 @@ public class Aims {
                 int length = readInt(scanner);
                 System.out.print("Cost: ");
                 float cost = readFloat(scanner);
-                store.addMedia(new DigitalVideoDisc(title, category, director, length, cost));
+                try {
+                    store.addMedia(new DigitalVideoDisc(title, category, director, length, cost));
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             case 2:
                 System.out.print("Enter media title: ");
@@ -243,7 +259,11 @@ public class Aims {
                 if (media == null) {
                     System.out.println("Media not found.");
                 } else {
-                    store.removeMedia(media);
+                    try {
+                        store.removeMedia(media);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
                 break;
             default:
