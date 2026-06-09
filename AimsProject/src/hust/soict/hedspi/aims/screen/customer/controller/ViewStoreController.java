@@ -2,21 +2,29 @@ package hust.soict.hedspi.aims.screen.customer.controller;
 
 import java.io.IOException;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import hust.soict.hedspi.aims.cart.Cart;
 import hust.soict.hedspi.aims.store.Store;
 
 public class ViewStoreController {
     private Store store;
+    private Cart cart;
 
     @FXML
     private GridPane gridPane;
 
-    public ViewStoreController(Store store) {
+    public ViewStoreController(Store store, Cart cart) {
         this.store = store;
+        this.cart = cart;
     }
 
     @FXML
@@ -29,7 +37,7 @@ public class ViewStoreController {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource(ITEM_FXML_FILE_PATH));
-                ItemController itemController = new ItemController();
+                ItemController itemController = new ItemController(cart);
                 fxmlLoader.setController(itemController);
                 AnchorPane anchorPane = new AnchorPane();
                 anchorPane = fxmlLoader.load();
@@ -49,6 +57,19 @@ public class ViewStoreController {
     }
 
     @FXML
-    void btnViewCartPressed() {
+    void btnViewCartPressed(ActionEvent event) {
+        try {
+            final String CART_FXML_FILE_PATH = "/hust/soict/hedspi/aims/screen/customer/view/Cart.fxml";
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CART_FXML_FILE_PATH));
+            Parent root = null;
+            CartController cartController = new CartController(store, cart);
+            fxmlLoader.setController(cartController);
+            root = fxmlLoader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -9,8 +9,7 @@
 
 <AnchorPane style="-fx-border-color: black;"
             xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="hust.soict.hedspi.aims.screen.customer.controller.ItemController">
+            xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <VBox alignment="CENTER" prefHeight="175.0" prefWidth="305.0">
             <children>

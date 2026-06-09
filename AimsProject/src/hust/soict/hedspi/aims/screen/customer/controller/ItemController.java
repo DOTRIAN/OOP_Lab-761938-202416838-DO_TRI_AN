@@ -6,10 +6,12 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import hust.soict.hedspi.aims.cart.Cart;
 import hust.soict.hedspi.aims.media.Media;
 import hust.soict.hedspi.aims.media.Playable;
 
 public class ItemController {
+    private Cart cart;
     private Media media;
 
     @FXML
@@ -23,6 +25,10 @@ public class ItemController {
 
     @FXML
     private Button btnPlay;
+
+    public ItemController(Cart cart) {
+        this.cart = cart;
+    }
 
     public void setData(Media media) {
         this.media = media;
@@ -38,9 +44,13 @@ public class ItemController {
 
     @FXML
     void btnAddToCartClicked(ActionEvent event) {
+        cart.addMedia(media);
     }
 
     @FXML
     void btnPlayClicked(ActionEvent event) {
+        if (media instanceof Playable) {
+            ((Playable) media).play();
+        }
     }
 }

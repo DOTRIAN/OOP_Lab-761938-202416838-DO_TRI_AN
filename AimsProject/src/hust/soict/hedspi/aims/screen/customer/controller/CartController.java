@@ -2,9 +2,14 @@ package hust.soict.hedspi.aims.screen.customer.controller;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -12,11 +17,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import hust.soict.hedspi.aims.cart.Cart;
 import hust.soict.hedspi.aims.media.Media;
 import hust.soict.hedspi.aims.media.Playable;
+import hust.soict.hedspi.aims.store.Store;
+
+import java.io.IOException;
 
 public class CartController {
+    private Store store;
     private Cart cart;
     private FilteredList<Media> filteredMedia;
 
@@ -53,7 +63,8 @@ public class CartController {
     @FXML
     private RadioButton radioBtnFilterTitle;
 
-    public CartController(Cart cart) {
+    public CartController(Store store, Cart cart) {
+        this.store = store;
         this.cart = cart;
     }
 
@@ -86,6 +97,13 @@ public class CartController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 showFilteredMedia(newValue);
+            }
+        });
+
+        cart.getItemsOrdered().addListener(new ListChangeListener<Media>() {
+            @Override
+            public void onChanged(Change<? extends Media> c) {
+                costLabel.setText(cart.totalCost() + " $");
             }
         });
     }
@@ -125,16 +143,38 @@ public class CartController {
 
     @FXML
     void btnViewStorePressed(ActionEvent event) {
+        try {
+            final String STORE_FXML_FILE_PATH = "/hust/soict/hedspi/aims/screen/customer/view/Store.fxml";
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(STORE_FXML_FILE_PATH));
+            ViewStoreController viewStoreController = new ViewStoreController(store, cart);
+            fxmlLoader.setController(viewStoreController);
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void btnPlayPressed(ActionEvent event) {
+        Media media = tblMedia.getSelectionModel().getSelectedItem();
+        if (media instanceof Playable) {
+            ((Playable) media).play();
+        }
     }
 
     @FXML
     void btnRemovePressed(ActionEvent event) {
         Media media = tblMedia.getSelectionModel().getSelectedItem();
         cart.removeMedia(media);
+        costLabel.setText(cart.totalCost() + " $");
+    }
+
+    @FXML
+    void btnPlaceOrderPressed(ActionEvent event) {
+        cart.getItemsOrdered().clear();
         costLabel.setText(cart.totalCost() + " $");
     }
 }
