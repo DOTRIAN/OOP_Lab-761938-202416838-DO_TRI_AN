@@ -23,17 +23,25 @@ public class StoreTest {
         cd.addTrack(track1);
         cd.addTrack(track2);
 
-        store.addMedia(dvd1);
-        store.addMedia(dvd2);
-        store.addMedia(dvd3);
-        store.addMedia(book);
-        store.addMedia(cd);
+        try {
+            store.addMedia(dvd1);
+            store.addMedia(dvd2);
+            store.addMedia(dvd3);
+            store.addMedia(book);
+            store.addMedia(cd);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         store.displayStore();
 
         store.removeMedia(dvd2);
         store.displayStore();
 
-        store.removeMedia(dvd2); // test case not found
+        try {
+            store.removeMedia(dvd2); // test case not found
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
